@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { OrderForm, mapDispatchToProps} from '../OrderForm/OrderForm';
+import * as actions from '../../actions';
 
 
 describe('OrderForm', () => {
@@ -56,6 +57,34 @@ describe('OrderForm', () => {
 
     expect(wrapper.instance().handleSubmit).toHaveBeenCalled();
   });
-
-    
 });
+
+describe('mapDispatchToProps', () => {
+  let mockDispatch;
+
+  beforeEach(() => {
+    mockDispatch = jest.fn();
+  });
+
+  it('should call dispatch with a setOrders action', () => {
+    let orders = [
+      {
+        id: 1,
+        name: 'Emmett',
+        ingredients: ['beans', 'cheese']
+      },
+      {
+        id: 2,
+        name: 'Penelope',
+        ingredients: ['chicken', 'cheese']
+      }
+    ];
+
+    const actionToDispatch = actions.setOrders(orders);
+    const mappedProps = mapDispatchToProps(mockDispatch);
+
+    mappedProps.setOrders(orders);
+
+    expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+    });
+  });   
