@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import * as actions from '../../actions';
-// import { getOrders } from '../../apiCalls';
+import { getOrders } from '../../apiCalls';
 import { Orders, mapStateToProps, mapDispatchToProps } from './Orders';
 
 
@@ -9,7 +9,7 @@ describe('Orders', () => {
   let wrapper;
   let orders;
   jest.mock('../../actions');
-  // jest.mock('../../apiCalls');
+  jest.mock('../../apiCalls');
 
   beforeEach(() => {
     orders = [
@@ -28,8 +28,12 @@ describe('Orders', () => {
   });
 
   it('should match the snapshot', () => {
+
     expect(wrapper).toMatchSnapshot();
   });
+});   
+
+
 
   describe('mapStateToProps', () => {
     it('should return an object with 1 property', () => {
@@ -77,5 +81,3 @@ describe('Orders', () => {
       expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
     });
   });
-
-});
