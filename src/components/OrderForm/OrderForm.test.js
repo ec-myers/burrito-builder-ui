@@ -3,7 +3,6 @@ import { shallow } from 'enzyme';
 import { OrderForm, mapDispatchToProps} from '../OrderForm/OrderForm';
 import * as actions from '../../actions';
 
-
 describe('OrderForm', () => {
   let wrapper;
 
@@ -14,35 +13,34 @@ describe('OrderForm', () => {
     }
   }; 
 
-    let mockEventIngredients = {
-      target: {
-        'name': 'beans',
-      },
-      preventDefault: jest.fn()
-    };
+  let mockEventIngredients = {
+    target: {
+      'name': 'beans',
+    },
+    preventDefault: jest.fn()
+  };
 
-    beforeEach(() => {
-      wrapper = shallow(<OrderForm />)
-    });
+  beforeEach(() => {
+    wrapper = shallow(<OrderForm />)
+  });
 
-    it('should match the snapshot', () => {
-      expect(wrapper).toMatchSnapshot();
-    });
+  it('should match the snapshot', () => {
+    expect(wrapper).toMatchSnapshot();
+  });
 
-    it('should update form state when handleNameChange is called', () => {
-      const expectedName = 'Piper';
+  it('should update form state when handleNameChange is called', () => {
+    const expectedName = 'Piper';
 
-      wrapper.instance().handleNameChange(mockEventName);
-      expect(wrapper.state('name')).toEqual(expectedName);
-    });
+    wrapper.instance().handleNameChange(mockEventName);
+    expect(wrapper.state('name')).toEqual(expectedName);
+  });
 
-    it('should update form state when handleIngredientChange is called', () => {
-      const expectedIngredients = ['beans'];
-  
-      wrapper.instance().handleIngredientChange(mockEventIngredients);
-      expect(wrapper.state('ingredients')).toEqual(expectedIngredients);
-    });
+  it('should update form state when handleIngredientChange is called', () => {
+    const expectedIngredients = ['beans'];
 
+    wrapper.instance().handleIngredientChange(mockEventIngredients);
+    expect(wrapper.state('ingredients')).toEqual(expectedIngredients);
+  });
 
   it('should call handleSubmit on submit', () => {
     wrapper.instance().handleSubmit = jest.fn();
@@ -73,11 +71,11 @@ describe('mapDispatchToProps', () => {
       }
     ];
 
-    const actionToDispatch = actions.setOrders(orders);
-    const mappedProps = mapDispatchToProps(mockDispatch);
+  const actionToDispatch = actions.setOrders(orders);
+  const mappedProps = mapDispatchToProps(mockDispatch);
 
-    mappedProps.setOrders(orders);
+  mappedProps.setOrders(orders);
 
-    expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
-    });
-  });   
+  expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+  });
+});   

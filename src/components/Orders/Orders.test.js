@@ -35,49 +35,49 @@ describe('Orders', () => {
 
 
 
-  describe('mapStateToProps', () => {
-    it('should return an object with 1 property', () => {
-      let orders;
-      let mockState = {
-        orders
-      };
+describe('mapStateToProps', () => {
+  it('should return an object with 1 property', () => {
+    let orders;
+    let mockState = {
+      orders
+    };
 
-      let expected = {
-        orders
-      };
+    let expected = {
+      orders
+    };
 
-      const mappedProps = mapStateToProps(mockState);
+    const mappedProps = mapStateToProps(mockState);
 
-      expect(mappedProps).toEqual(expected);
-    });
+    expect(mappedProps).toEqual(expected);
+  });
+});
+
+describe('mapDispatchToProps', () => {
+  let mockDispatch;
+
+  beforeEach(() => {
+    mockDispatch = jest.fn();
   });
 
-  describe('mapDispatchToProps', () => {
-    let mockDispatch;
+  it('should call dispatch with a setOrders action', () => {
+    let orders = [
+      {
+        id: 1,
+        name: 'Emmett',
+        ingredients: ['beans', 'cheese']
+      },
+      {
+        id: 2,
+        name: 'Penelope',
+        ingredients: ['chicken', 'cheese']
+      }
+    ];
 
-    beforeEach(() => {
-      mockDispatch = jest.fn();
-    });
+    const actionToDispatch = actions.setOrders(orders);
+    const mappedProps = mapDispatchToProps(mockDispatch);
 
-    it('should call dispatch with a setOrders action', () => {
-      let orders = [
-        {
-          id: 1,
-          name: 'Emmett',
-          ingredients: ['beans', 'cheese']
-        },
-        {
-          id: 2,
-          name: 'Penelope',
-          ingredients: ['chicken', 'cheese']
-        }
-      ];
+    mappedProps.setOrders(orders);
 
-      const actionToDispatch = actions.setOrders(orders);
-      const mappedProps = mapDispatchToProps(mockDispatch);
-
-      mappedProps.setOrders(orders);
-
-      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
-    });
+    expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
   });
+});
