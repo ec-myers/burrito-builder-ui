@@ -23,15 +23,15 @@ export class OrderForm extends Component {
     this.setState({ingredients: [...this.state.ingredients, e.target.name]});
   }
 
-  handleSubmit = e => {
+  handleSubmit = async (e) => {
     const { setOrders } = this.props;
     e.preventDefault();
     if (this.state.name !== '' && this.state.ingredients.length !== 0) {
-      addOrder(this.state);
-      getOrders();
-      setOrders();
+      await addOrder(this.state);
+      let data = await getOrders();
+      setOrders(data.orders);
+      this.clearInputs();
     }
-    this.clearInputs();
   }
 
   clearInputs = () => {
