@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import * as actions from '../../actions';
+import { getOrders } from '../../apiCalls';
 import { Orders, mapStateToProps, mapDispatchToProps } from './Orders';
 
 
@@ -8,14 +9,14 @@ describe('Orders', () => {
   let wrapper;
   let orders;
   jest.mock('../../actions');
+  jest.mock('../../apiCalls');
 
   beforeEach(() => {
-    wrapper = shallow(<Orders />)
     orders = [
       {
-      id: 1,
-      name: 'Emmett',
-      ingredients: ['beans', 'cheese']
+        id: 1,
+        name: 'Emmett',
+        ingredients: ['beans', 'cheese']
       },
       {
         id: 2,
@@ -23,9 +24,10 @@ describe('Orders', () => {
         ingredients: ['chicken', 'cheese']
       }
     ];
+    wrapper = shallow(<Orders orders={orders}/>)
   });
 
-  it.skip('should match the snapshot', () => {
+  it('should match the snapshot', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
