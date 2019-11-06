@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import * as actions from '../../actions';
-import { getOrders } from '../../apiCalls';
+// import { getOrders } from '../../apiCalls';
 import { Orders, mapStateToProps, mapDispatchToProps } from './Orders';
 
 
@@ -9,7 +9,7 @@ describe('Orders', () => {
   let wrapper;
   let orders;
   jest.mock('../../actions');
-  jest.mock('../../apiCalls');
+  // jest.mock('../../apiCalls');
 
   beforeEach(() => {
     orders = [
@@ -45,6 +45,36 @@ describe('Orders', () => {
       const mappedProps = mapStateToProps(mockState);
 
       expect(mappedProps).toEqual(expected);
+    });
+  });
+
+  describe('mapDispatchToProps', () => {
+    let mockDispatch;
+
+    beforeEach(() => {
+      mockDispatch = jest.fn();
+    });
+
+    it('should call dispatch with a setOrders action', () => {
+      let orders = [
+        {
+          id: 1,
+          name: 'Emmett',
+          ingredients: ['beans', 'cheese']
+        },
+        {
+          id: 2,
+          name: 'Penelope',
+          ingredients: ['chicken', 'cheese']
+        }
+      ];
+
+      const actionToDispatch = actions.setOrders(orders);
+      const mappedProps = mapDispatchToProps(mockDispatch);
+
+      mappedProps.setOrders(orders);
+
+      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
     });
   });
 
