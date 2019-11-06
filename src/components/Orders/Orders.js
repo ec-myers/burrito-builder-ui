@@ -13,7 +13,8 @@ export class Orders extends Component {
   }
 
   render() { 
-    const orderEls = this.props.orders.map(order => {
+    const { orders } = this.props;
+    const orderEls = orders.map(order => {
       return (
         <div className="order" key={order.id}>
           <h3>{order.name}</h3>
