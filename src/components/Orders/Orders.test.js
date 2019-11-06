@@ -33,8 +33,6 @@ describe('Orders', () => {
   });
 });   
 
-
-
 describe('mapStateToProps', () => {
   it('should return an object with 1 property', () => {
     let orders;
