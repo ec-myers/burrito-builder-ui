@@ -40,4 +40,25 @@ describe('orders', () => {
 
     expect(orders(initialState, action)).toEqual(result);
   });
+
+  it('should not match the case SET_ORDERS if type is incorrect', () => {
+    const initialState = [];
+    const action = {
+      type: 'WRONG_TYPE',
+      orders: [
+        {
+          id: 1,
+          name: 'Emmett',
+          ingredients: ['beans', 'cheese']
+        },
+        {
+          id: 2,
+          name: 'Penelope',
+          ingredients: ['chicken', 'cheese']
+        }
+      ]
+    };
+
+    expect(orders(initialState, action)).toEqual(initialState);
+  });
 });
