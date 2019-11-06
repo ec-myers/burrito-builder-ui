@@ -49,5 +49,13 @@ describe('OrderForm', () => {
       expect(wrapper.state('ingredients')).toEqual(expectedIngredients);
     });
 
+
+  it('should call handleSubmit on submit', () => {
+    wrapper.instance().handleSubmit = jest.fn();
+    wrapper.find('.submit-btn').simulate('click');
+
+    expect(wrapper.instance().handleSubmit).toHaveBeenCalled();
+  });
+
     
 });
