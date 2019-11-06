@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setOrders } from '../../actions';
 
-class OrderForm extends Component {
+export class OrderForm extends Component {
   constructor(props) {
     super();
     this.props = props;
@@ -23,15 +23,15 @@ class OrderForm extends Component {
     this.setState({ingredients: [...this.state.ingredients, e.target.name]});
   }
 
-  handleSubmit = e => {
+  handleSubmit = async (e) => {
     const { setOrders } = this.props;
     e.preventDefault();
     if (this.state.name !== '' && this.state.ingredients.length !== 0) {
-      addOrder(this.state);
-      getOrders();
-      setOrders();
+      await addOrder(this.state);
+      let data = await getOrders();
+      setOrders(data.orders);
+      this.clearInputs();
     }
-    this.clearInputs();
   }
 
   clearInputs = () => {
@@ -62,7 +62,7 @@ class OrderForm extends Component {
 
         <p>Order: { this.state.ingredients.join(', ') || 'Nothing selected' }</p>
 
-        <button onClick={e => this.handleSubmit(e)}>
+        <button className='submit-btn' onClick={e => this.handleSubmit(e)}>
           Submit Order
         </button>
       </form>
