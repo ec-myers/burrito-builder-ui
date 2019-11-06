@@ -16,9 +16,9 @@ describe('OrderForm', () => {
 
     let mockEventIngredients = {
       target: {
-        name: 'ingredients',
-        value:['bean', 'cheese']
-      }
+        'name': 'beans',
+      },
+      preventDefault: jest.fn()
     };
 
     beforeEach(() => {
@@ -36,17 +36,10 @@ describe('OrderForm', () => {
       expect(wrapper.state('name')).toEqual(expectedName);
     });
 
-    it.skip('should update form state when handleIngredientChange is called', () => {
-      const expectedIngredients = ['bean', 'cheese'];
-      const mockEvent = {
-        target: {
-          name: 'ingredients',
-          value: ['bean', 'cheese']
-        },
-        preventDefault: jest.fn()
-      };
-      wrapper.instance().handleIngredientChange(mockEvent);
-      console.log(wrapper.state('ingredients'))
+    it('should update form state when handleIngredientChange is called', () => {
+      const expectedIngredients = ['beans'];
+  
+      wrapper.instance().handleIngredientChange(mockEventIngredients);
       expect(wrapper.state('ingredients')).toEqual(expectedIngredients);
     });
 
