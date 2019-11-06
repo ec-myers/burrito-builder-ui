@@ -27,4 +27,11 @@ describe('OrderForm', () => {
     it('should match the snapshot', () => {
       expect(wrapper).toMatchSnapshot();
     });
+
+    it('should update form state when handleNameChange is called', () => {
+      const expectedName = 'Piper';
+
+      wrapper.instance().handleNameChange(mockEventName);
+      expect(wrapper.state('name')).toEqual(expectedName);
+    });
 });
